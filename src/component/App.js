@@ -16,29 +16,27 @@ export default class App extends React.Component {
   };
 
   handleClick = buttonName => {
+
     this.setState(calculate(this.state, buttonName));
 
   };
 
+  //if character in array is not a number, then add spacing on the sides
   addSpacingToCurrent(currentEquation) {
     for (let i = 0; i < currentEquation.length; i++) {
       let char = currentEquation[i]
-      //if character in array is not a number, then add spacing on the sides
-      if (!isNumber(char) && i !== 0) {
+      if (!isNumber(char) && i !== 0 && char !== '.') {
         currentEquation[i] = " " + char + " "
       }
     }
     return currentEquation.join('')
   };
+  //if more than one item is in currentEquation, break reference and format it; else assign current total as firt item in currentEquation
   formatCurrentEquation() {
-
     if (this.state.currentEquation.length > 0) {
-      // use spread operator to break refrence to avoid mutating the state directly
       let currentEquation = [...this.state.currentEquation]
-      //return the copy with the proper spacing
       return this.addSpacingToCurrent(currentEquation)
     } else if (this.state.total && this.state.currentEquation.length === 0) {
-      //otherwise, if have a new total, reset current equation with new total so we can start a new equation based off of what we had. 
       this.setState({ currentEquation: [this.state.total] })
     }
   };
