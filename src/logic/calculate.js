@@ -186,7 +186,6 @@ function handleCommand(obj, buttonName) {
     return buildHistory(obj)
   }
   // no operation yet, but the user typed one
-
   // The user hasn't typed a number yet, just save the operation
   if (!obj.next) {
     obj.operation = buttonName
@@ -217,7 +216,7 @@ function pushCurrentEquation(obj, buttonName) {
   if (buttonName !== "Del" && buttonName !== "=") {
     //don't push 'del' or '=' into the array
     //if it's a number it can always be added
-    //if it's a character, only add it if it's immediately preceding character is a number
+    //if it's a character, only add it if it's immediately preceding character is a number or %
     if (current.length > 0 && (isNumber(lastChar) || lastChar === '%')) {
       current.push(buttonName)
     }
@@ -235,7 +234,7 @@ function pushCurrentEquation(obj, buttonName) {
   return copyObj
 }
 
-//All roads lead to build History. adds to stateHistory dictionary which is a key/value pair
+//All roads lead to build History (except reset() and del()) which adds to stateHistory dictionary which is a key/value pair
 //where the key is index of currentEquation array, and the value is the state that occurred at that point in time
 function buildHistory(obj) {
   let lastIndex = obj.currentEquation.length - 1
