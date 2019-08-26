@@ -218,7 +218,7 @@ function pushCurrentEquation(obj, buttonName) {
     //don't push 'del' or '=' into the array
     //if it's a number it can always be added
     //if it's a character, only add it if it's immediately preceding character is a number
-    if (current.length > 0 && isNumber(lastChar)) {
+    if (current.length > 0 && (isNumber(lastChar) || lastChar === '%')) {
       current.push(buttonName)
     }
     //only first char can be a number
