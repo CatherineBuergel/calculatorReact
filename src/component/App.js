@@ -12,7 +12,7 @@ export default class App extends React.Component {
     operation: null,
     currentEquation: [],
     currentTotal: null,
-    totalHistory: {},
+    stateHistory: {},
   };
 
   handleClick = buttonName => {
@@ -45,7 +45,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="component-app">
-        <Display currentEquation={this.formatCurrentEquation() || "0"} currentTotal={this.state.currentTotal || ""} />
+        <Display currentEquationString={this.formatCurrentEquation() || "0"} currentTotal={this.state.currentTotal || ""} currentEquationArray={this.state.currentEquation} />
         <ButtonPanel clickHandler={this.handleClick} />
       </div>
     );

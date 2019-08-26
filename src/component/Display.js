@@ -6,15 +6,17 @@ import "./Display.css";
 
 export default class Display extends React.Component {
   static propTypes = {
-    currentEquation: PropTypes.string,
-    currentTotal: PropTypes.string
+    currentEquationString: PropTypes.string,
+    currentTotal: PropTypes.string,
+    currentEquationArray: PropTypes.array
   };
 
   shouldDisplayTotal() {
     // debugger
-    let lastIndex = this.props.currentEquation.length - 1
-    let lastChar = this.props.currentEquation[lastIndex]
-    if (!isNumber(lastChar)) {
+    let lastIndex = this.props.currentEquationArray.length - 1
+    let lastChar = this.props.currentEquationArray[lastIndex]
+    if (!isNumber(lastChar) && lastChar !== '%') {
+      console.log(lastChar)
       return " "
     } else {
       return this.props.currentTotal
@@ -24,7 +26,7 @@ export default class Display extends React.Component {
   render() {
     return (
       <div className="component-display">
-        <div>{this.props.currentEquation}</div>
+        <div>{this.props.currentEquationString}</div>
         <small>{this.shouldDisplayTotal()}</small>
       </div>
     );
